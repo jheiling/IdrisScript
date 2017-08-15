@@ -81,7 +81,13 @@ interface ToJS from (to : JSType) where
 implementation ToJS String JSString where
   toJS str = MkJSString (believe_me str)
 
+implementation ToJS Nat JSNumber where
+  toJS num = MkJSNumber (believe_me num)
+
 implementation ToJS Int JSNumber where
+  toJS num = MkJSNumber (believe_me num)
+
+implementation ToJS Integer JSNumber where
   toJS num = MkJSNumber (believe_me num)
 
 implementation ToJS Double JSNumber where
@@ -99,6 +105,9 @@ implementation FromJS JSString String where
 
 implementation FromJS JSNumber Int where
   fromJS (MkJSNumber num) = cast {from=Double} {to=Int} (believe_me num)
+
+implementation FromJS JSNumber Integer where
+  fromJS (MkJSNumber num) = cast {from=Double} {to=Integer} (believe_me num)
 
 implementation FromJS JSNumber Double where
   fromJS (MkJSNumber num) = believe_me num
