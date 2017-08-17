@@ -24,7 +24,7 @@ setProperty : (prop : String)
            -> (obj : JSValue (JSObject c))
            -> JS_IO (JSValue (JSObject c))
 setProperty prop val obj = do
-  jscall "%0[%1] = %2" (Ptr -> String -> Ptr -> JS_IO Ptr)
+  jscall "%0[%1] = %2" (Ptr -> String -> Ptr -> JS_IO ())
          (unpack obj) prop (unpack val)
   pure obj
 
